@@ -41,13 +41,13 @@ NB: If you are downloading multiple videos (i.e. from search results, playlists 
 ```js
 const ytcog = require('ytcog');
 const session = new ytcog.Session([cookie, userAgent]);
-console.log(`Session status: ${session.status}`); 
+await session.fetch();
+console.log(`session status: ${session.status}`);
 ```
 
 __cookie__ and __userAgent__ are optional, but in order to obtain them log onto YouTube in your browser. Goto settings > ... > developer tools. Refresh the page. Goto network>headers. Find the "www.youtube.com" entry. In the request headers you will find "cookie" and "user-agent". Pass these string values in your ytcog sessions. 
 
 A session object is required to create search, channel, playlist and video objects.
-To confirm that your session 
 
 ### Search
 
