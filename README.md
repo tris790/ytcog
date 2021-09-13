@@ -34,19 +34,20 @@ __videoOptions__ (object) See the [wiki](https://github.com/gatecrasher777/ytcog
 __cookie__ (string) is optional. With a cookie, everything will work. Without it, age-restricted video streams will not be retrieved and there might be some rate-limiting (although none reported so far)  
 __userAgent__ (string) is optional. Since ytcog emulates a browser session, you can make all requests use your browser's user agent.  
 
-NB: If you are downloading multiple files (i.e. from search results, playlists or channels) then maintianing a session and using download() on a video object is much more efficient than ytcog.dl()
+NB: If you are downloading multiple videos (i.e. from search results, playlists or channels) then maintianing a session and using video.download() is much more efficient than running ytcog.dl() on each video.
 
 ### Session
 
 ```js
 const ytcog = require('ytcog');
 const session = new ytcog.Session([cookie, userAgent]);
-await session.fetch();
+console.log(`Session status: ${session.status}`); 
 ```
 
 __cookie__ and __userAgent__ are optional, but in order to obtain them log onto YouTube in your browser. Goto settings > ... > developer tools. Refresh the page. Goto network>headers. Find the "www.youtube.com" entry. In the request headers you will find "cookie" and "user-agent". Pass these string values in your ytcog sessions. 
 
 A session object is required to create search, channel, playlist and video objects.
+To confirm that your session 
 
 ### Search
 
@@ -159,10 +160,16 @@ playlist.videos.forEach((video)=>{...}); //accumulated
 
 ### Video
 
+Get metadata, media and stream information:
 ```js
 const video = new ytcog.Video(session, videoOptions);
 await video.fetch();
-if (video.status == 'OK') await video.download();
+```
+
+Or just download:
+```js
+const video = new ytcog.Video(session, videoOptions);
+await video.download();
 ```
 
 __videoOptions__ See [wiki](https://github.com/gatecrasher777/ytcog/wiki/Video#Options) for all video options. 
