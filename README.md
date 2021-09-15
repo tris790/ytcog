@@ -127,7 +127,7 @@ await channel.fetch({items: 'search', query: 'vlogs'});
 Iterate through the results with:
 
 ```js
-search.results.forEach((item)=>{});  //current
+channel.results.forEach((item)=>{});  //current
 channel.videos.forEach((video)=>{...}); //accumulated
 channel.playlists.forEach((playlist)=>{...}); //accumulated
 channel.channels.forEach((chan)=>{...}); //accumulated
